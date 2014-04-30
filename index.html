@@ -11,12 +11,16 @@
   <script type="text/x-handlebars" data-template-name="teams">
     <section id="teams">
       <h2>Basketball Stats</h2>
-      <h4>Teams<h4>
-        {{input type="text" id="new-team" placeholder="Team Location, Team Name" value=newTeam action="createTeam"}}
+      <h3>Teams:</h3>
         <ul id="teams">
           {{#each team in controller}}
-            <li><p {{action "teamSelect" team on="click"}}>{{team.name}}  {{team.selected}}</p></li>
+            <li><h4 {{action "teamSelect" team on="click"}}>{{team.name}}</p></li>
+            {{#each player in team.players}}
+              <li>{{player.name}}</li>
+            {{/each}}
           {{/each}}
+        <p>Add a New Team</p>
+        {{input type="text" id="new-team" placeholder="Team Location, Team Name" value=newTeam action="createTeam"}}
         </ul>
     </section>
     <section id="players">
@@ -31,13 +35,19 @@
   <script type="text/x-handlebars" data-template-name="players">
     <section id="players">
       <h2>{{team.name}}</h2>
-      <h4>Players<h4>
-        {{input type="text" id="new-player" placeholder="Player's Name" value=newPlayer action="createPlayer"}}
+      <h3>Current players:</h3>
         <ul id="players">
-          {{#each}}
-            <li>{{name}}</li>
+          {{#each team.players}}
+            <li>{{player.name}}</li>
           {{/each}}
+        <p>Add a New Player to the {{team.name}}</p>
+        {{input type="text" id="new-player" placeholder="Player's Name" value=newPlayer action="createPlayer" model='player'}}
         </ul>
+         <ul id="teams">
+         <h2> All the Players </h2>
+          {{#each}}
+            <li><h4 {{name}}> </h4></li>
+          {{/each}}
     </section>
   </script>
 

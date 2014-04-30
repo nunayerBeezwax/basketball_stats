@@ -10,6 +10,11 @@ Basketball.TeamsController = Ember.ArrayController.extend({
     },
     teamSelect: function(team) {
       team.set('selected', true);
+    },
+    addPlayerToTeam: function() {
+      var team = this.store.find('team', {'selected': true})
+      team.players.pushObject(player)
+      team.save()
     }
   }
 });

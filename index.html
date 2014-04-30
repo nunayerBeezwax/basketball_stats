@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Basketball Stats</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <script type="text/x-handlebars" data-template-name="teams">
+    <section id="teams">
+      <h2>Basketball Stats</h2>
+      <h4>Teams<h4>
+        {{input type="text" id="new-team" placeholder="Team Location, Team Name" value=newTeam action="createTeam"}}
+        <ul id="teams">
+          {{#each team in controller}}
+            <li><p {{action "teamSelect" team on="click"}}>{{team.name}}  {{team.selected}}</p></li>
+          {{/each}}
+        </ul>
+    </section>
+    <section id="players">
+      {{#each team in controller}}
+        {{#if team.selected}}
+          {{render "players" }}
+        {{/if}}
+      {{/each}}
+    </section>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="players">
+    <section id="players">
+      <h2>{{team.name}}</h2>
+      <h4>Players<h4>
+        {{input type="text" id="new-player" placeholder="Player's Name" value=newPlayer action="createPlayer"}}
+        <ul id="players">
+          {{#each}}
+            <li>{{name}}</li>
+          {{/each}}
+        </ul>
+    </section>
+  </script>
+
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/handlebars-1.1.2.js"></script>
+  <script src="js/libs/ember-1.5.1.js"></script>
+  <script src="js/libs/ember-data.js"></script>
+  <script src="js/libs/localstorage_adapter.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/router.js"></script>
+
+  <script src="js/models/team.js"></script>
+  <script src="js/models/player.js"></script>
+  <script src="js/controllers/teams_controller.js"></script>
+  <script src="js/controllers/players_controller.js"></script>
+
+</body>
+</html>
